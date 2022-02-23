@@ -1,3 +1,2 @@
-https://github.com/jg-jung/toy_project.git
-
-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
+https -- > https://github.com/jg-jung/toy_project.git
+token key --> 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
