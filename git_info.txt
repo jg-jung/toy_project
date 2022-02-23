@@ -2,5 +2,5 @@ https -- > https://github.com/jg-jung/toy_project.git
 
 token key --> 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
 
- Expiration
+[Expiration]
 This token expires on Tue, May 24 2022. To set a new expiration date, you must regenerate the token.
