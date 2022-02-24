@@ -11,8 +11,8 @@ public class Sample {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
+    
     private String name;
     
-    //getter, setter 생략
+   //빌더생성?
 }

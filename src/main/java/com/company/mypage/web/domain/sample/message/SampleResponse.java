@@ -6,6 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SampleResponse {
-	  private String name;
-	  private String number;
+	private String name;
+	private String number;
+	  
+	//빌더생성?
 }
