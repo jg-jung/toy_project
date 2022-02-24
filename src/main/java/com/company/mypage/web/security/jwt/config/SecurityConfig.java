@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,12 +26,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(customUserDetailsService);
     }
-
+    
+    /*
+    @Override public void configure(WebSecurity web) throws Exception { 
+    	web.ignoring().antMatchers("/h2-console/**"); 
+    }
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
-            .authorizeRequests().antMatchers("/auth", "/join").permitAll()
+        http.csrf()
+        	.ignoringAntMatchers("/h2-console/**") // H2 콘솔을 사용하기 위함.
+        	.disable()
+            .authorizeRequests().antMatchers("/login", "/join", "/h2-console/**").permitAll()
             .anyRequest().authenticated();
         // Stateless (세션사용X)
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

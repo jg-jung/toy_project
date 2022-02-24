@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,6 +41,7 @@ public class HomeController {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager; // authenticate 메서드 : username, password 기반 인증 수행
     private final PasswordEncoder passwordEncoder;
+    
     @GetMapping("/home")
     public String home() {
         return "home";
@@ -47,24 +51,29 @@ public class HomeController {
      * 회원가입
      */
     @PostMapping("/join")
-    public ResponseEntity<Long> join(@RequestBody RegistryRequest request) {
+    public ResponseEntity<Map<String, Object>> join(@RequestBody RegistryRequest request) {
         User savedUser
                 = userRepository.save(new User(request.getUsername(), passwordEncoder.encode(request.getPassword()), request.getAge(), request.getRole()));
         log.info("savedUser.username = {} ", savedUser.getUsername());
         log.info("savedUser.password = {} ", savedUser.getPassword());
         log.info("savedUser.age = {} ", savedUser.getAge());
         log.info("savedUser.role = {} ", savedUser.getRole());
-
-        return ResponseEntity.ok(savedUser.getId());
+        
+        Map<String, Object> rtnBody = new HashMap<>();
+        rtnBody.put("username", savedUser.getUsername());
+        rtnBody.put("password", savedUser.getPassword());
+        rtnBody.put("age", savedUser.getAge());
+        rtnBody.put("role", savedUser.getRole());
+        
+        return ResponseEntity.ok(rtnBody);
     }
 
     /**
      * 인증요청
      */
-    @PostMapping("/auth")
-    public ResponseEntity<LoginSuccessResponse> authenticateTest(
-            @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        log.info("/auth 호출");
+    @PostMapping("/login")
+    public ResponseEntity<LoginSuccessResponse> authenticateTest(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+        log.info("/login auth 호출");
         try {
             // username, password 인증 시도
             log.info("loginRequest.username = {}", loginRequest.getUsername());
@@ -76,8 +85,9 @@ public class HomeController {
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("로그인 실패");
         }
+        
         // 인증 성공 후 인증된 user의 정보를 갖고옴
-        log.info("/auth username = {}", loginRequest.getUsername());
+        log.info("/login username = {}", loginRequest.getUsername());
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.username);
         // subject, claim 모두 UserDetails를 사용하므로 객체를 그대로 전달
         String token = jwtUtil.generateToken(userDetails);

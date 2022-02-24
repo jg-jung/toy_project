@@ -9,7 +9,11 @@ import java.util.Collection;
 
 public class SecurityUser implements UserDetails {
 
-    private User user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1386481350104745986L;
+	private User user;
 
     public SecurityUser(User user) {
         this.user = user;
