@@ -32,6 +32,11 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		
+		<dependency> 
+		    <groupId>org.springframework.boot</groupId> 
+		    <artifactId>spring-boot-starter-validation</artifactId> 
+		</dependency>
+		
 		<!-- for JWT -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
@@ -45,6 +50,42 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+		<dependency>
+		    <groupId>org.javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.15.0-GA</version>
+		</dependency>		
+		
+		<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+		<dependency>
+		    <groupId>org.modelmapper</groupId>
+		    <artifactId>modelmapper</artifactId>
+		    <version>2.1.1</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.querydsl</groupId>
+		  <artifactId>querydsl-apt</artifactId>
+		  <version>${querydsl.version}</version>
+		  <scope>provided</scope>
+		</dependency>
+		
+		<!-- JSON Utility -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+		
+		<dependency>
+		  <groupId>com.querydsl</groupId>
+		  <artifactId>querydsl-jpa</artifactId>
+		  <version>${querydsl.version}</version>
+		</dependency>
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
