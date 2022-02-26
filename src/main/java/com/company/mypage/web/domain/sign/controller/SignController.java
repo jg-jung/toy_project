@@ -10,6 +10,7 @@ import com.company.mypage.web.util.auth.AuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -53,4 +54,18 @@ public class SignController {
 							"USER"))
 				.body(authentication);
 	}
+	
+	/*
+	 * 
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String login(Model model, String error, String logout) {
+		if ( error != null ) {
+			model.addAttribute("errorMsg", "Your username and password are invalid.");
+		}
+		if ( logout != null ) {
+			model.addAttribute("msg", "You have been logged out successfully");
+		}
+		return "login";
+	}
+	*/
 }

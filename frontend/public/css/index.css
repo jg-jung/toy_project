@@ -1,0 +1,31 @@
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.white-backgroud {
+    background-color: #fff;
+}
+
+.heading {
+    border-bottom: #212529 2px solid;
+}
+
+.margin-top10 {
+    margin-top: 10px;
+}
